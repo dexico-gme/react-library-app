@@ -8,11 +8,13 @@ const books = [
     title: "Poppy Cooks: The Actually Delicious Air Fryer Cookbook",
     author: "Poppy O'Toole",
     img: "./images/81CFHLszkjL._AC_UL900_SR900,600_.jpg",
+    id: 1,
   },
   {
     title: "The Last Devil To Die",
     author: "Richard Osman",
     img: "https://images-eu.ssl-images-amazon.com/images/I/71+HvqfKF-L._AC_UL900_SR900,600_.jpg",
+    id: 2,
   },
 ];
 
@@ -23,7 +25,14 @@ const newNames = names.map((name) => {
 });
 
 const BookList = () => {
-  return <section className='booklist'>{newNames}</section>;
+  return (
+    <section className='booklist'>
+      {books.map((book) => {
+        const { img, title, author, id } = book;
+        return <Book {...book} key={book.id} />;
+      })}
+    </section>
+  );
 };
 
 // parameters
@@ -38,10 +47,12 @@ const someObject = {
   name: "john",
   job: "developer",
   location: "florida",
+  id: 1,
 };
 
 const Book = (props) => {
   const { img, title, author, children } = props;
+  console.log(props);
   return (
     <article className='book'>
       <img src={img} alt={title}></img>
